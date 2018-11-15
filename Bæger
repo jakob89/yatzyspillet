@@ -1,0 +1,21 @@
+namespace Yatzy
+{
+   public class Baeger
+    { 
+        public Terning Terning1 = new Terning();
+        public Terning Terning2 = new Terning();
+        public Terning Terning3 = new Terning();
+        public Terning Terning4 = new Terning();
+        public Terning Terning5 = new Terning();
+
+        public void RystBaeger()
+        {
+            Terning1.KastTerning();
+            Terning2.KastTerning();
+            Terning3.KastTerning();
+            Terning4.KastTerning();
+            Terning5.KastTerning();
+        }
+
+    }
+}
