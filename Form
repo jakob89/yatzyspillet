@@ -1,0 +1,28 @@
+namespace Yatzy
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        public Baeger mitBaeger = new Baeger(); // her newer man en instans af en klasse op, så man kan connecte en classe ind i formen. Dette gør, at klassen nu er brugbar i nedenstående.
+        
+
+        private void buttonKastTerninger_Click(object sender, EventArgs e) // Dette er knappen Kaster Terninger
+        {
+            mitBaeger.RystBaeger();                                     // her kalder vi metode RystBaeger, som vi har erklæret inde i bæger. Den er brugbar, fordi vi har "new'et" den up inde i denne klasse.
+            richTextBoxTerning1.Text = mitBaeger.Terning1.Øjne.ToString();  // her henviser vi til teksten i tekstboksen for den første terning. Vi beder den indeholde bægerets øjne pr. terning og konvertere to string.
+            richTextBoxTerning2.Text = mitBaeger.Terning2.Øjne.ToString();
+            richTextBoxTerning3.Text = mitBaeger.Terning3.Øjne.ToString();
+            richTextBoxTerning4.Text = mitBaeger.Terning4.Øjne.ToString();
+            richTextBoxTerning5.Text = mitBaeger.Terning5.Øjne.ToString();
+        }
+
+        private void checkBoxHold1_CheckedChanged(object sender, EventArgs e)
+        {
+            //metode for at holde terning1
+        }
+    }
+}
