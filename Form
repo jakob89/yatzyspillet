@@ -1,3 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
 namespace Yatzy
 {
     public partial class Form1 : Form
@@ -8,7 +18,7 @@ namespace Yatzy
         }
 
         public Baeger mitBaeger = new Baeger(); // her newer man en instans af en klasse op, så man kan connecte en classe ind i formen. Dette gør, at klassen nu er brugbar i nedenstående.
-        
+        public spiller _spiller = new spiller();
 
         private void buttonKastTerninger_Click(object sender, EventArgs e) // Dette er knappen Kaster Terninger
         {
@@ -22,7 +32,102 @@ namespace Yatzy
 
         private void checkBoxHold1_CheckedChanged(object sender, EventArgs e)
         {
-            //metode for at holde terning1
+            if (checkBoxHold1.Checked == true)    //metode for at holde terning1 -- dette er en kontrolstruktur (?)
+                mitBaeger.Terning1.HoldTerning();   //kalder metode inde fra terningen, som instruerer i at holde på terningen
+            else
+            {
+                mitBaeger.Terning1.TagTerningMed(); // kalder metode inde fra terningen, som instruerer i at tage terningen med. 
+            }
+        }
+
+        private void checkBoxHold2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxHold2.Checked == true)    //metode for at holde terning1
+                mitBaeger.Terning2.HoldTerning();
+            else
+            {
+                mitBaeger.Terning2.TagTerningMed();
+            }
+        }
+
+        private void checkBoxHold3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxHold3.Checked == true)    //metode for at holde terning1
+                mitBaeger.Terning3.HoldTerning();
+            else
+            {
+                mitBaeger.Terning3.TagTerningMed();
+            }
+        }
+
+        private void checkBoxHold4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxHold4.Checked == true)    //metode for at holde terning1
+                mitBaeger.Terning4.HoldTerning();
+            else
+            {
+                mitBaeger.Terning4.TagTerningMed();
+            }
+        }
+
+        private void checkBoxHold5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxHold5.Checked == true)    //metode for at holde terning1
+                mitBaeger.Terning5.HoldTerning();
+            else
+            {
+                mitBaeger.Terning5.TagTerningMed();
+            }
+        }
+
+        private void buttonNytSpil_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBoxMuligheder_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listBoxMuligheder.Items.Add("Ettere");
+            listBoxMuligheder.Items.Add("Toere");
+            listBoxMuligheder.Items.Add("Treere");
+            listBoxMuligheder.Items.Add("Firere");
+            listBoxMuligheder.Items.Add("Femmere");
+            listBoxMuligheder.Items.Add("Seksere");
+            listBoxMuligheder.Items.Add("Et par");
+            listBoxMuligheder.Items.Add("To par");
+            listBoxMuligheder.Items.Add("Tre ens");
+            listBoxMuligheder.Items.Add("Fire ens");
+            listBoxMuligheder.Items.Add("Fuld hus");
+            listBoxMuligheder.Items.Add("Lille trappe");
+            listBoxMuligheder.Items.Add("Stor trappe");
+            listBoxMuligheder.Items.Add("Chancen");
+            listBoxMuligheder.Items.Add("Yatzy");
+        }
+
+        
+
+
+        public spiller Spiller1 = new spiller();
+        public spiller Spiller2 = new spiller();
+        public spiller Spiller3 = new spiller();
+        public spiller Spiller4 = new spiller();
+
+
+        private int SpillerNr = 1;
+        private int AntalSlagTilbage = 3;
+
+        public void TurTæller()
+        {
+            if (AntalSlagTilbage == 0)
+                buttonKastTerninger.Enabled = false;
+            if ( SpillerNr == 4)
+             SpillerNr = 1; 
+
+            else { SpillerNr = SpillerNr + 1; }
+
+            labelVisAktivSpiller.Text = "Spiller" + SpillerNr.ToString();
+            labelVisKastTilbage.Text = AntalSlagTilbage.ToString();
+
         }
     }
 }
