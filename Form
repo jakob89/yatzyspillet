@@ -17,8 +17,11 @@ namespace Yatzy
             InitializeComponent();
         }
 
+        
+
+
         public Baeger mitBaeger = new Baeger(); // her newer man en instans af en klasse op, så man kan connecte en classe ind i formen. Dette gør, at klassen nu er brugbar i nedenstående.
-        public spiller _spiller = new spiller();
+        public Spiller _spiller = new Spiller();
 
         private void buttonKastTerninger_Click(object sender, EventArgs e) // Dette er knappen Kaster Terninger
         {
@@ -82,12 +85,12 @@ namespace Yatzy
 
         private void buttonNytSpil_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void listBoxMuligheder_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listBoxMuligheder.Items.Add("Ettere");
+            listBoxMuligheder.Items.Add("Ettere");  // Brug switchcases
             listBoxMuligheder.Items.Add("Toere");
             listBoxMuligheder.Items.Add("Treere");
             listBoxMuligheder.Items.Add("Firere");
@@ -107,10 +110,10 @@ namespace Yatzy
         
 
 
-        public spiller Spiller1 = new spiller();
-        public spiller Spiller2 = new spiller();
-        public spiller Spiller3 = new spiller();
-        public spiller Spiller4 = new spiller();
+        public Spiller Spiller1 = new Spiller();
+        public Spiller Spiller2 = new Spiller();
+        public Spiller Spiller3 = new Spiller();
+        public Spiller Spiller4 = new Spiller();
 
 
         private int SpillerNr = 1;
@@ -119,11 +122,13 @@ namespace Yatzy
         public void TurTæller()
         {
             if (AntalSlagTilbage == 0)
+            {
                 buttonKastTerninger.Enabled = false;
-            if ( SpillerNr == 4)
-             SpillerNr = 1; 
-
-            else { SpillerNr = SpillerNr + 1; }
+                if (SpillerNr == 4)
+                    SpillerNr = 1;
+                else { SpillerNr = SpillerNr +1; }
+            }
+            else { AntalSlagTilbage = AntalSlagTilbage - 1; }
 
             labelVisAktivSpiller.Text = "Spiller" + SpillerNr.ToString();
             labelVisKastTilbage.Text = AntalSlagTilbage.ToString();
