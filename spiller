@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Yatzy
 {
-    public class spiller
+    public class Spiller
     {
-        private string navn { get; set; } 
-
         
+        private string navn { get; set; }
+        public Kombinationer kombinationer { get; set; } = new Kombinationer();
+
     }
 }
