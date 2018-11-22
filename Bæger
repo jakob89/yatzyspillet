@@ -22,6 +22,79 @@ namespace Yatzy
             Terning4.KastTerning();
             Terning5.KastTerning();
         }
-   }
+
+
+        public int HvorMangeAfEnSlags(int Slags)
+        {
+            int Antal = 0;
+            if (Terning1.Øjne == Slags)
+            { Antal = Antal + 1; }
+            if (Terning2.Øjne == Slags)
+            { Antal = Antal + 1; }
+            if (Terning3.Øjne == Slags)
+            { Antal = Antal + 1; }
+            if (Terning4.Øjne == Slags)
+            { Antal = Antal + 1; }
+            if (Terning5.Øjne == Slags)
+            { Antal = Antal + 1; }
+            return Antal;
+        }
+
+
+        public int PointEttere()
+        {
+            return HvorMangeAfEnSlags(1);
+        }
+
+        public int PointToere()
+        {
+            return HvorMangeAfEnSlags(2) * 2;
+        }
+
+        public int PointTreere()
+        {
+            return HvorMangeAfEnSlags(3) * 3;
+        }
+
+        public int PointFirere()
+        {
+            return HvorMangeAfEnSlags(4) * 4;
+        }
+
+        public int PointFemmere()
+        {
+            return HvorMangeAfEnSlags(5) * 5;
+        }
+
+        public int PointSeksere()
+        {
+            return HvorMangeAfEnSlags(6) * 6;
+        }
+
+        public int TreAfEnSlags()
+        {
+            int i;  //i'et repræsenterer antal øjne på terningen
+            for (i = 6; i >= 1; i--)
+            { 
+            if (HvorMangeAfEnSlags(i) > 2)
+                return i * 3;
+            } 
+             return 0;
+        }
+
+        public int FireAfEnSlags()
+        {
+            int i;  //i'et repræsenterer antal øjne på terningen
+            for (i = 6; i >= 1; i--) // forloop starter med at tjekke på 6'ere (indikeret af i=6) og derefter 5,4,3,2,1 (indikeret af ;>=1). For hvert trin går i én ned (indikeret er i--)
+            {
+                if (HvorMangeAfEnSlags(i) > 3) // her tester vi, om flere terninger med samme antal øjne (i) er over 3 - altså fire ens.
+                    return i * 4; //hvis det er tilfældet ganges antallet af øjne på den slags (i) med 4 for fire ens.
+            }
+            return 0; //ellers returneres intet.
+        }
+
+
+
+    }
 }
 
