@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Yatzy
+{
+    public class Kombinationer
+    {
+        private Resultat Ettere, Toere, Treere, Firere, Femmere, Seksere, EtPar, ToPar, TreEns, FireEns, LilleTrappe, StorTrappe, FuldHus, Chance, Yatzy;
+        private List<Resultat> AlleResultater;
+
+        public Kombinationer()
+        {
+            Ettere = new Resultat { navn = Resultat.Ettere };
+            Toere = new Resultat { navn = Resultat.Toere };
+            Treere = new Resultat { navn = Resultat.Treere };
+            Firere = new Resultat { navn = Resultat.Firere };
+            Femmere = new Resultat { navn = Resultat.Femmere };
+            Seksere = new Resultat { navn = Resultat.Seksere };
+            EtPar = new Resultat { navn = Resultat.EtPar };
+            ToPar = new Resultat { navn = Resultat.ToPar };
+            TreEns = new Resultat { navn = Resultat.TreEns };
+            FireEns = new Resultat { navn = Resultat.FireEns };
+            LilleTrappe = new Resultat { navn = Resultat.LilleTrappe };
+            StorTrappe = new Resultat { navn = Resultat.StorTrappe };
+            FuldHus = new Resultat { navn = Resultat.FuldHus };
+            Chance = new Resultat { navn = Resultat.Chance };
+            Yatzy = new Resultat { navn = Resultat.Yatzy };
+
+            AlleResultater = new List<Resultat> { Ettere, Toere, Treere, Firere, Femmere, Seksere, EtPar, ToPar, TreEns, FireEns, LilleTrappe, StorTrappe, FuldHus, Chance, Yatzy}
+            
+
+        }
+    }
+}
