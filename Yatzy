@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Yatzy
+{
+    public class Yatzy
+    {
+        private Spiller _spiller1, _spiller2, _spiller3;
+        public Baeger baeger = new Baeger();
+        public Spiller AktivSpiller;
+
+        public void NytSpil(Spiller et, Spiller to, Spiller tre)
+        {
+            baeger = new Baeger();
+            _spiller1 = et;
+            _spiller2 = to;
+            _spiller3 = tre;
+            AktivSpiller = _spiller1;
+        }
+
+        // start spil < navn fra GUI - opretter spiller. Sætter navnet fra GUI og gemmer i yatzy Spiller_1
+       //spillere - har resultatet af en specifik type "New'er" 4 op. Henter funktionaliteten fra kolonne og derigennem pointfelt
+
+        //Sammenligningen mellem dicecombination og "muligheder" (evt. fra bæger) Man sammenligner det, man har gemt på spillere med det, man lige har slået inde i bægeret.
+    }
+}
+
