@@ -71,6 +71,24 @@ namespace Yatzy
             return HvorMangeAfEnSlags(6) * 6;
         }
 
+        public int HøjestePar()
+        {
+            int i;  //i'et repræsenterer antal øjne på terningen
+            for (i = 6; i >= 1; i--) // vi starter ved seks for at finde det største par
+            {
+                if (HvorMangeAfEnSlags(i) > 1)
+                    // VI SKAL HAVE DEN TIL AT STOPPE, NÅR DEN FINDER DET FØRSTE PAR
+                    return i * 2;
+            }
+            return 0;
+        }
+
+        public int HøjesteToPar()
+        {
+            return 0; // HVORDAN FANGER VI DET SAMME SOM OVENFOR? EFTERFØLGENDE SKAL DEN TJEKKE FOR NÆSTHØJESTE PAR.
+            
+        }
+
         public int TreAfEnSlags()
         {
             int i;  //i'et repræsenterer antal øjne på terningen
