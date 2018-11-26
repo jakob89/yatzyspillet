@@ -188,8 +188,7 @@ namespace Yatzy
                     return i * 5; 
             }
             return 0;
-        }
-          
+        }   
     }
 }
 
