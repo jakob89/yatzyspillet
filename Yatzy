@@ -8,23 +8,51 @@ namespace Yatzy
 {
     public class Yatzy
     {
-        private Spiller _spiller1, _spiller2, _spiller3;
-        public Baeger baeger = new Baeger();
+        public Spiller _spiller1, _spiller2, _spiller3, _spiller4;
+        public Baeger mitBaeger = new Baeger();
         public Spiller AktivSpiller;
 
-        public void NytSpil(Spiller et, Spiller to, Spiller tre)
+        public void NytSpil(Spiller et, Spiller to, Spiller tre, Spiller fire)
         {
-            baeger = new Baeger();
+            mitBaeger = new Baeger();
             _spiller1 = et;
             _spiller2 = to;
             _spiller3 = tre;
+            _spiller4 = fire;
             AktivSpiller = _spiller1;
+
         }
 
-        // start spil < navn fra GUI - opretter spiller. Sætter navnet fra GUI og gemmer i yatzy Spiller_1
-       //spillere - har resultatet af en specifik type "New'er" 4 op. Henter funktionaliteten fra kolonne og derigennem pointfelt
+        //DET HER HAR JEG PILLET UD AF FORM.CS. MÅSKE SKAL DEN TILBAGE?!
+        private int SpillerNr = 1;
+        private int AntalSlagTilbage = 3;
 
-        //Sammenligningen mellem dicecombination og "muligheder" (evt. fra bæger) Man sammenligner det, man har gemt på spillere med det, man lige har slået inde i bægeret.
+        public void TurTæller()
+        {
+            if (AntalSlagTilbage == 0)
+            {
+                AntalSlagTilbage = 3;
+                //mitBaeger.HoldTerning1.
+
+               // buttonKastTerninger.Enabled = false;
+                if (SpillerNr == 4)
+                    SpillerNr = 1;
+                else { SpillerNr = SpillerNr + 1; }
+            }
+            else { AntalSlagTilbage = AntalSlagTilbage - 1; }
+
+            //textBoxVisAktivSpiller.Text = mitYatzy._spiller1.Navn.ToString();
+            //textBoxVisKastTilbage.Text = AntalSlagTilbage.ToString();
+
+
+            //krydstjekker bægerets mulige kombinationer med currentplayers muligheder fra kombineationer: ErStreget && ErUdfyldt == false.
+
+            // start spil < navn fra GUI - opretter spiller. Sætter navnet fra GUI og gemmer i yatzy Spiller_1
+            //spillere - har resultatet af en specifik type "New'er" 4 op. Henter funktionaliteten fra kolonne og derigennem pointfelt
+
+            //Sammenligningen mellem dicecombination og "muligheder" (evt. fra bæger) Man sammenligner det, man har gemt på spillere med det, man lige har slået inde i bægeret.
+        }
     }
+
 }
 
