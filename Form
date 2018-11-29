@@ -19,12 +19,12 @@ namespace Yatzy
 
         public Yatzy mitYatzy = new Yatzy();
         public Baeger mitBaeger = new Baeger(); // her newer man en instans af en klasse op, så man kan connecte en classe ind i formen. Dette gør, at klassen nu er brugbar i nedenstående.
-        
+
 
         private void buttonKastTerninger_Click(object sender, EventArgs e) // Dette er knappen Kaster Terninger
         {
 
-            TurTæller();
+
 
             mitBaeger.RystBaeger();                                     // her kalder vi metode RystBaeger, som vi har erklæret inde i bæger. Den er brugbar, fordi vi har "new'et" den up inde i denne klasse.
             richTextBoxTerning1.Text = mitBaeger.Terning1.Øjne.ToString();  // her henviser vi til teksten i tekstboksen for den første terning. Vi beder den indeholde bægerets øjne pr. terning og konvertere to string.
@@ -32,6 +32,9 @@ namespace Yatzy
             richTextBoxTerning3.Text = mitBaeger.Terning3.Øjne.ToString();
             richTextBoxTerning4.Text = mitBaeger.Terning4.Øjne.ToString();
             richTextBoxTerning5.Text = mitBaeger.Terning5.Øjne.ToString();
+
+            VisMuligheder();
+            
         }
 
         private void checkBoxHold1_CheckedChanged(object sender, EventArgs e)
@@ -86,51 +89,63 @@ namespace Yatzy
 
         private void buttonNytSpil_Click(object sender, EventArgs e)
         {
+
+           
             
         }
 
-        private void listBoxMuligheder_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            listBoxMuligheder.Items.Add("Ettere");  // Brug switchcases
-            listBoxMuligheder.Items.Add("Toere");
-            listBoxMuligheder.Items.Add("Treere");
-            listBoxMuligheder.Items.Add("Firere");
-            listBoxMuligheder.Items.Add("Femmere");
-            listBoxMuligheder.Items.Add("Seksere");
-            listBoxMuligheder.Items.Add("Et par");
-            listBoxMuligheder.Items.Add("To par");
-            listBoxMuligheder.Items.Add("Tre ens");
-            listBoxMuligheder.Items.Add("Fire ens");
-            listBoxMuligheder.Items.Add("Fuld hus");
-            listBoxMuligheder.Items.Add("Lille trappe");
-            listBoxMuligheder.Items.Add("Stor trappe");
-            listBoxMuligheder.Items.Add("Chancen");
-            listBoxMuligheder.Items.Add("Yatzy");
-        }
-
-        private int SpillerNr = 1;
-        private int AntalSlagTilbage = 3;
+        
+      
         
 
-        public void TurTæller()
-        { 
-            if (AntalSlagTilbage == 0)
-            {
-                buttonKastTerninger.Enabled = false;
-                if (SpillerNr == 4)
-                    SpillerNr = 1;
-                else { SpillerNr = SpillerNr +1; }
-            }
-            else { AntalSlagTilbage = AntalSlagTilbage - 1; }
+        
 
-            textBoxVisAktivSpiller.Text = mitYatzy._spiller1.Navn.ToString();
-            textBoxVisKastTilbage.Text = AntalSlagTilbage.ToString();
-
-        }
+        
 
         public void textBoxSpiller1_TextChanged(object sender, EventArgs e)
         {
             textBoxSpiller1.Text = mitYatzy._spiller1.Navn;
         }
+
+        public void VisMuligheder()
+        {
+            listBoxMuligheder.Items.Clear();
+
+            if (mitBaeger.PointEttere() > 0) { listBoxMuligheder.Items.Add("Ettere"); }
+            if (mitBaeger.PointToere() > 0) { listBoxMuligheder.Items.Add("Toere"); }
+            if (mitBaeger.PointTreere() > 0) { listBoxMuligheder.Items.Add("Treere"); }
+            if (mitBaeger.PointFirere() > 0) { listBoxMuligheder.Items.Add("Fireere"); }
+            if (mitBaeger.PointFemmere() > 0) { listBoxMuligheder.Items.Add("Femmere"); }
+            if (mitBaeger.PointSeksere() > 0) { listBoxMuligheder.Items.Add("Seksere"); }
+            if (mitBaeger.PointEtPar() > 0) { listBoxMuligheder.Items.Add("Et par"); }
+            if (mitBaeger.PointToPar() > 0) { listBoxMuligheder.Items.Add("To par"); }
+            if (mitBaeger.PointTreEns() > 0) { listBoxMuligheder.Items.Add("Tre ens"); }
+            if (mitBaeger.PointFireEns() > 0) { listBoxMuligheder.Items.Add("Fire ens"); }
+            if (mitBaeger.PointFuldHus() > 0) { listBoxMuligheder.Items.Add("Fuld hus"); }
+            if (mitBaeger.PointLilleTrappe() > 0) { listBoxMuligheder.Items.Add("Lille trappe"); }
+            if (mitBaeger.PointStorTrappe() > 0) { listBoxMuligheder.Items.Add("Stor trappe"); }
+            if (mitBaeger.PointChance() > 0) { listBoxMuligheder.Items.Add("Chance"); }
+            if (mitBaeger.PointYatzy() > 0) { listBoxMuligheder.Items.Add("Yatzy"); }
+            
+
+        }
+
+        private void buttonVaelgMulighed_Click(object sender, EventArgs e)
+        {
+            switch (listBoxMuligheder.Text)
+            {
+                case "Ettere":
+                    {
+                        //minYatzyBlok,.Kolonnespiller1.Ettere.Point = mitBaeger.PointEttere();
+                        //txtEnSp1.Text = Convert.ToString(minYatzyBlok.KolonneSpiller1.Ettere.Point);
+
+                        //mitYatzy.AktivSpiller.Resultat.Kombinationer.Ettere = mitBaeger.PointEttere;
+                        //textBoxEttereP1.Text = Convert.ToString(mitBaeger.PointEttere)
+                        break;
+                    }
+            }
+        }
+
+        
     }
 }
