@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Yatzy
 {
-    class Resultat
+    public class Resultat 
     {
-        private string navn;
-        private bool ErStreget;
-        private bool ErUdfyldt;
-        private int Point;
+        public string Navn { get; set; }
+      //  public bool ErStreget { get; set; }
+      //  public bool ErUdfyldt { get; set; }
+        public int Point { get; set; }
 
     }
 }
