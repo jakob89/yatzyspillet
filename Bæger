@@ -109,7 +109,7 @@ namespace Yatzy
             return 0;
         }
 
-        public int TreAfEnSlags()
+        public int PointTreEns()
         {
             int i;  //i'et repræsenterer antal øjne på terningen
             for (i = 6; i >= 1; i--)
@@ -120,7 +120,7 @@ namespace Yatzy
              return 0;
         }
 
-        public int FireAfEnSlags()
+        public int PointFireEns()
         {
             int i;  //i'et repræsenterer antal øjne på terningen
             for (i = 6; i >= 1; i--) // forloop starter med at tjekke på 6'ere (indikeret af i=6) og derefter 5,4,3,2,1 (indikeret af ;>=1). For hvert trin går i én ned (indikeret er i--)
@@ -131,7 +131,7 @@ namespace Yatzy
             return 0; //ellers returneres intet.
         }
 
-        public int StoersteVaerdiFuldHus()
+        public int PointFuldHus()
         {
             int i; //i repræsenterer antal øjne på terningen
             int treAfEnSlags = 0;
@@ -159,14 +159,14 @@ namespace Yatzy
 
         public int PointLilleTrappe()   
         {
-            if (HvorMangeAfEnSlags(1) < 2 && HvorMangeAfEnSlags(2) < 2 && HvorMangeAfEnSlags(3) < 2 && HvorMangeAfEnSlags(4) < 2 && HvorMangeAfEnSlags(5) < 2)
+            if (HvorMangeAfEnSlags(1) == 1 && HvorMangeAfEnSlags(2) == 1 && HvorMangeAfEnSlags(3) == 1 && HvorMangeAfEnSlags(4) == 1 && HvorMangeAfEnSlags(5) == 1 && HvorMangeAfEnSlags(6) == 0)
                 return 15;
             else return 0;
         }
 
         public int PointStorTrappe()
         {
-            if (HvorMangeAfEnSlags(2) < 2 && HvorMangeAfEnSlags(3) < 2 && HvorMangeAfEnSlags(4) < 2 && HvorMangeAfEnSlags(5) < 2 && HvorMangeAfEnSlags(6) < 2)
+            if (HvorMangeAfEnSlags(1) == 0 && HvorMangeAfEnSlags(2) == 1 && HvorMangeAfEnSlags(3) == 1 && HvorMangeAfEnSlags(4) == 1 && HvorMangeAfEnSlags(5) == 1 && HvorMangeAfEnSlags(6) == 1)
                 return 20;
             else return 0;
         }
@@ -177,6 +177,7 @@ namespace Yatzy
             int sum;
             sum = Terning1.Øjne + Terning2.Øjne + Terning3.Øjne + Terning4.Øjne + Terning5.Øjne;
             return sum;
+           
         }
 
         public int PointYatzy()
@@ -188,7 +189,8 @@ namespace Yatzy
                     return i * 5; 
             }
             return 0;
-        }   
+        }
+          
     }
 }
 
