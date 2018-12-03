@@ -8,7 +8,7 @@ namespace Yatzy
 {
     public class Kombinationer
     {
-        private Resultat Ettere, Toere, Treere, Firere, Femmere, Seksere, EtPar, ToPar, TreEns, FireEns, FuldHus, LilleTrappe, StorTrappe, Chance, Yatzy;
+        public Resultat Ettere, Toere, Treere, Firere, Femmere, Seksere, EtPar, ToPar, TreEns, FireEns, FuldHus, LilleTrappe, StorTrappe, Chance, Yatzy;
 
         public Kombinationer()
         { 
@@ -29,8 +29,29 @@ namespace Yatzy
         Yatzy = new Resultat { Navn = "Yatzy" };
 
         }
-        
 
+        public int SimpelSum // dette skal ikke være en metode men en variabel.
+        {
+            get{ return (Ettere.Point + Toere.Point + Treere.Point + Firere.Point + Femmere.Point + Seksere.Point); }
+        }
+
+        public int Bonus // dette skal ikke være en metode men en variabel.
+        {
+            get
+            {
+                if (SimpelSum >= 63)
+                { return 50; }
+                else { return 0; }
+            }
+        }
+
+        public int Total
+        {
+            get
+            {
+                return (SimpelSum + Bonus + EtPar.Point + ToPar.Point + TreEns.Point + FireEns.Point + FuldHus.Point + LilleTrappe.Point + StorTrappe.Point + Chance.Point + Yatzy.Point);
+            }
+        }
     }
 }
 
