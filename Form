@@ -23,9 +23,6 @@ namespace Yatzy
 
         private void buttonKastTerninger_Click(object sender, EventArgs e) // Dette er knappen Kaster Terninger
         {
-
-
-
             mitBaeger.RystBaeger();                                     // her kalder vi metode RystBaeger, som vi har erklæret inde i bæger. Den er brugbar, fordi vi har "new'et" den up inde i denne klasse.
             richTextBoxTerning1.Text = mitBaeger.Terning1.Øjne.ToString();  // her henviser vi til teksten i tekstboksen for den første terning. Vi beder den indeholde bægerets øjne pr. terning og konvertere to string.
             richTextBoxTerning2.Text = mitBaeger.Terning2.Øjne.ToString();
@@ -34,8 +31,11 @@ namespace Yatzy
             richTextBoxTerning5.Text = mitBaeger.Terning5.Øjne.ToString();
 
             VisMuligheder();
-            
+            TurTæller();
+            TurSkifter();
         }
+
+
 
         private void checkBoxHold1_CheckedChanged(object sender, EventArgs e)
         {
@@ -87,20 +87,55 @@ namespace Yatzy
             }
         }
 
-        private void buttonNytSpil_Click(object sender, EventArgs e)
-        {
+        private int SpillerNr = 1;
+        private int AntalSlagTilbage = 3;
 
-           
-            
+        public void TurTæller()
+        {
+            if (AntalSlagTilbage == 0)
+            {
+                AntalSlagTilbage = 2;
+
+                if (SpillerNr == 4)
+                { SpillerNr = 1; }
+                else { SpillerNr = SpillerNr + 1; }
+            }
+            else { AntalSlagTilbage = AntalSlagTilbage - 1; }
+
+            textBoxVisAktivSpiller.Text = "Spiller " + SpillerNr.ToString();
+            textBoxVisKastTilbage.Text = AntalSlagTilbage.ToString();
+         }
+
+        private void TurSkifter()
+        {
+            if(AntalSlagTilbage == 0 && mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { mitYatzy.AktivSpiller = mitYatzy._spiller2; }
+            if (AntalSlagTilbage == 0 && mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { mitYatzy.AktivSpiller = mitYatzy._spiller3; }
+            if (AntalSlagTilbage == 0 && mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { mitYatzy.AktivSpiller = mitYatzy._spiller4; }
+            if (AntalSlagTilbage == 0 && mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { mitYatzy.AktivSpiller = mitYatzy._spiller1; }
         }
 
         
-      
-        
 
-        
 
-        
+        private void ClearText()
+        {
+            foreach (Control c in Controls)
+            {
+                if (c is TextBox)
+                {
+                    c.Text = "";
+                }
+                if (c is RichTextBox)
+                {
+                    c.Text = "";
+                }
+            }
+            listBoxMuligheder.Items.Clear();
+        }
 
         public void textBoxSpiller1_TextChanged(object sender, EventArgs e)
         {
@@ -136,16 +171,213 @@ namespace Yatzy
             {
                 case "Ettere":
                     {
-                        //minYatzyBlok,.Kolonnespiller1.Ettere.Point = mitBaeger.PointEttere();
-                        //txtEnSp1.Text = Convert.ToString(minYatzyBlok.KolonneSpiller1.Ettere.Point);
-
-                        //mitYatzy.AktivSpiller.Resultat.Kombinationer.Ettere = mitBaeger.PointEttere;
-                        //textBoxEttereP1.Text = Convert.ToString(mitBaeger.PointEttere)
+                        mitYatzy.AktivSpiller.Kombinationer.Ettere.Point = mitBaeger.PointEttere();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxEttereP1.Text = Convert.ToString(mitBaeger.PointEttere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxEttereP2.Text = Convert.ToString(mitBaeger.PointEttere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxEttereP3.Text = Convert.ToString(mitBaeger.PointEttere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxEttereP4.Text = Convert.ToString(mitBaeger.PointEttere()); }
+                        break;
+                    }
+                case "Toere":
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.Toere.Point = mitBaeger.PointToere();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxToereP1.Text = Convert.ToString(mitBaeger.PointToere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxToereP2.Text = Convert.ToString(mitBaeger.PointToere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxToereP3.Text = Convert.ToString(mitBaeger.PointToere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxToereP4.Text = Convert.ToString(mitBaeger.PointToere()); }
+                        break;
+                    }
+                case "Treere":
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.Treere.Point = mitBaeger.PointTreere();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxTreereP1.Text = Convert.ToString(mitBaeger.PointTreere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxTreereP2.Text = Convert.ToString(mitBaeger.PointTreere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxTreereP3.Text = Convert.ToString(mitBaeger.PointTreere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxTreereP4.Text = Convert.ToString(mitBaeger.PointTreere()); }
+                        break;
+                    }
+                case "Firere":
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.Firere.Point = mitBaeger.PointFirere();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxFirereP1.Text = Convert.ToString(mitBaeger.PointFirere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxFirereP2.Text = Convert.ToString(mitBaeger.PointFirere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxFirereP3.Text = Convert.ToString(mitBaeger.PointFirere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxFirereP4.Text = Convert.ToString(mitBaeger.PointFirere()); }
+                        break;
+                    }
+                case "Femmere":
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.Femmere.Point = mitBaeger.PointFemmere();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxFemmereP1.Text = Convert.ToString(mitBaeger.PointFemmere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxFemmereP2.Text = Convert.ToString(mitBaeger.PointFemmere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxFemmereP3.Text = Convert.ToString(mitBaeger.PointFemmere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxFemmereP4.Text = Convert.ToString(mitBaeger.PointFemmere()); }
+                        break;
+                    }
+                case "Seksere":
+                    { 
+                    mitYatzy.AktivSpiller.Kombinationer.Seksere.Point = mitBaeger.PointSeksere();
+                    if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                    { textBoxSeksereP1.Text = Convert.ToString(mitBaeger.PointSeksere()); }
+                    else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                    { textBoxSeksereP2.Text = Convert.ToString(mitBaeger.PointSeksere()); }
+                    else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                    { textBoxSeksereP3.Text = Convert.ToString(mitBaeger.PointSeksere()); }
+                    else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                    { textBoxSeksereP4.Text = Convert.ToString(mitBaeger.PointSeksere()); }
+                    break;
+                    }
+                case "Et par":
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.EtPar.Point = mitBaeger.PointEtPar();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxEtParP1.Text = Convert.ToString(mitBaeger.PointEtPar()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxEtParP2.Text = Convert.ToString(mitBaeger.PointEtPar()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxEtParP3.Text = Convert.ToString(mitBaeger.PointEtPar()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxEtParP4.Text = Convert.ToString(mitBaeger.PointEtPar()); }
+                        break;
+                    }
+                case "To par":
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.ToPar.Point = mitBaeger.PointToPar();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxToParP1.Text = Convert.ToString(mitBaeger.PointToPar()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxToParP2.Text = Convert.ToString(mitBaeger.PointToPar()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxToParP3.Text = Convert.ToString(mitBaeger.PointToPar()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxToParP4.Text = Convert.ToString(mitBaeger.PointToPar()); }
+                        break;
+                    }
+                case "Tre ens":
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.TreEns.Point = mitBaeger.PointTreEns();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxTreEnsP1.Text = Convert.ToString(mitBaeger.PointTreEns()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxTreEnsP2.Text = Convert.ToString(mitBaeger.PointTreEns()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxTreEnsP3.Text = Convert.ToString(mitBaeger.PointTreEns()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxTreEnsP4.Text = Convert.ToString(mitBaeger.PointTreEns()); }
+                        break;
+                    }
+                case "Fire ens":
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.FireEns.Point = mitBaeger.PointFireEns();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxFireEnsP1.Text = Convert.ToString(mitBaeger.PointFireEns()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxFireEnsP2.Text = Convert.ToString(mitBaeger.PointFireEns()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxFireEnsP3.Text = Convert.ToString(mitBaeger.PointFireEns()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxFireEnsP4.Text = Convert.ToString(mitBaeger.PointFireEns()); }
+                        break;
+                    }
+                case "Fuld hus":
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.FuldHus.Point = mitBaeger.PointFuldHus();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxFuldtHusP1.Text = Convert.ToString(mitBaeger.PointFuldHus()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxFuldtHusP2.Text = Convert.ToString(mitBaeger.PointFuldHus()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxFuldtHusP3.Text = Convert.ToString(mitBaeger.PointFuldHus()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxFuldtHusP4.Text = Convert.ToString(mitBaeger.PointFuldHus()); }
+                        break;
+                    }
+                case "Lille trappe":
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.LilleTrappe.Point = mitBaeger.PointLilleTrappe();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxLilleTrappeP1.Text = Convert.ToString(mitBaeger.PointLilleTrappe()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxLilleTrappeP2.Text = Convert.ToString(mitBaeger.PointLilleTrappe()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxLilleTrappeP3.Text = Convert.ToString(mitBaeger.PointLilleTrappe()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxLilleTrappeP4.Text = Convert.ToString(mitBaeger.PointLilleTrappe()); }
+                        break;
+                    }
+                case "Stor trappe":
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.StorTrappe.Point = mitBaeger.PointStorTrappe();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxStorTrappeP1.Text = Convert.ToString(mitBaeger.PointStorTrappe()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxStorTrappeP2.Text = Convert.ToString(mitBaeger.PointStorTrappe()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxStorTrappeP3.Text = Convert.ToString(mitBaeger.PointStorTrappe()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxStorTrappeP4.Text = Convert.ToString(mitBaeger.PointStorTrappe()); }
+                        break;
+                    }
+                case "Chance":
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.Chance.Point = mitBaeger.PointChance();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxChanceP1.Text = Convert.ToString(mitBaeger.PointChance()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxChanceP2.Text = Convert.ToString(mitBaeger.PointChance()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxChanceP3.Text = Convert.ToString(mitBaeger.PointChance()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxChanceP4.Text = Convert.ToString(mitBaeger.PointChance()); }
+                        break;
+                    }
+                case "Yatzy":
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.Yatzy.Point = mitBaeger.PointYatzy();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxYatzyP1.Text = Convert.ToString(mitBaeger.PointYatzy()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxYatzyP2.Text = Convert.ToString(mitBaeger.PointYatzy()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxYatzyP3.Text = Convert.ToString(mitBaeger.PointYatzy()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxYatzyP4.Text = Convert.ToString(mitBaeger.PointYatzy()); }
                         break;
                     }
             }
+            
         }
 
-        
+        public void buttonNytSpil_Click(object sender, EventArgs e)
+        {
+            ClearText();
+            mitYatzy.NytSpil();
+           
+        }
+
+        private void textBoxSumP1_TextChanged(object sender, EventArgs e)
+        {
+            textBoxSumP1.Text = mitYatzy._spiller1.SimpelSum.ToString
+        }
     }
 }
