@@ -70,11 +70,7 @@ namespace Yatzy
         {
             return HvorMangeAfEnSlags(6) * 6;
         }
-
-        // INDSÆT SIMPELSUM
-        // INDSÆT BONUS
-
-
+    
         public int PointEtPar()
         {
             int i;  //i'et repræsenterer antal øjne på terningen
@@ -186,7 +182,7 @@ namespace Yatzy
             for (i = 6; i >= 1; i--) 
             {
                 if (HvorMangeAfEnSlags(i) > 4) 
-                    return i * 5; 
+                    return 50; 
             }
             return 0;
         }
