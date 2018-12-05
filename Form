@@ -19,6 +19,11 @@ namespace Yatzy
 
         public Yatzy mitYatzy = new Yatzy();
         public Baeger mitBaeger = new Baeger(); // her newer man en instans af en klasse op, så man kan connecte en classe ind i formen. Dette gør, at klassen nu er brugbar i nedenstående.
+        public Spiller Spiller1 = new Spiller();
+        public Spiller Spiller2 = new Spiller();
+        public Spiller Spiller3 = new Spiller();
+        public Spiller Spiller4 = new Spiller();
+
 
 
         private void buttonKastTerninger_Click(object sender, EventArgs e) // Dette er knappen Kaster Terninger
@@ -30,9 +35,17 @@ namespace Yatzy
             richTextBoxTerning4.Text = mitBaeger.Terning4.Øjne.ToString();
             richTextBoxTerning5.Text = mitBaeger.Terning5.Øjne.ToString();
 
+
+            Spiller1.Navn = textBoxSpiller1.Text;
+            Spiller2.Navn = textBoxSpiller2.Text;
+            Spiller3.Navn = textBoxSpiller3.Text;
+            Spiller4.Navn = textBoxSpiller4.Text;
+
+            mitYatzy.NytSpil(Spiller1, Spiller2, Spiller3, Spiller4);
+
             VisMuligheder();
             TurTæller();
-            TurSkifter();
+
         }
 
 
@@ -49,7 +62,7 @@ namespace Yatzy
 
         private void checkBoxHold2_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxHold2.Checked == true)    //metode for at holde terning1
+            if (checkBoxHold2.Checked == true)    //metode for at holde terning2
                 mitBaeger.Terning2.HoldTerning();
             else
             {
@@ -59,7 +72,7 @@ namespace Yatzy
 
         private void checkBoxHold3_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxHold3.Checked == true)    //metode for at holde terning1
+            if (checkBoxHold3.Checked == true)    //metode for at holde terning3
                 mitBaeger.Terning3.HoldTerning();
             else
             {
@@ -69,7 +82,7 @@ namespace Yatzy
 
         private void checkBoxHold4_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxHold4.Checked == true)    //metode for at holde terning1
+            if (checkBoxHold4.Checked == true)    //metode for at holde terning4
                 mitBaeger.Terning4.HoldTerning();
             else
             {
@@ -79,12 +92,26 @@ namespace Yatzy
 
         private void checkBoxHold5_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxHold5.Checked == true)    //metode for at holde terning1
+            if (checkBoxHold5.Checked == true)    //metode for at holde terning5
                 mitBaeger.Terning5.HoldTerning();
             else
             {
                 mitBaeger.Terning5.TagTerningMed();
             }
+        }
+
+        private void ResetCheckbox()
+            {
+            if(checkBoxHold1.Checked == true)
+            { checkBoxHold1.Checked = false; }
+            if (checkBoxHold2.Checked == true)
+            { checkBoxHold2.Checked = false; }
+            if (checkBoxHold3.Checked == true)
+            { checkBoxHold3.Checked = false; }
+            if (checkBoxHold4.Checked == true)
+            { checkBoxHold4.Checked = false; }
+            if (checkBoxHold5.Checked == true)
+            { checkBoxHold5.Checked = false; }
         }
 
         private int SpillerNr = 1;
@@ -98,11 +125,22 @@ namespace Yatzy
 
                 if (SpillerNr == 4)
                 { SpillerNr = 1; }
-                else { SpillerNr = SpillerNr + 1; }
+                else {
+                    SpillerNr = SpillerNr + 1;
+                 }
             }
-            else { AntalSlagTilbage = AntalSlagTilbage - 1; }
+            else { AntalSlagTilbage = AntalSlagTilbage - 1;}
 
-            textBoxVisAktivSpiller.Text = "Spiller " + SpillerNr.ToString();
+            if (SpillerNr == 1)
+            { mitYatzy.AktivSpiller = mitYatzy._spiller1; }
+            if (SpillerNr == 2)
+            { mitYatzy.AktivSpiller = mitYatzy._spiller2; }
+            if (SpillerNr == 3)
+            { mitYatzy.AktivSpiller = mitYatzy._spiller3; }
+            if (SpillerNr == 4)
+            { mitYatzy.AktivSpiller = mitYatzy._spiller4; }
+
+            textBoxVisAktivSpiller.Text = mitYatzy.AktivSpiller.Navn.ToString();
             textBoxVisKastTilbage.Text = AntalSlagTilbage.ToString();
          }
 
@@ -117,9 +155,6 @@ namespace Yatzy
             if (AntalSlagTilbage == 0 && mitYatzy.AktivSpiller == mitYatzy._spiller4)
             { mitYatzy.AktivSpiller = mitYatzy._spiller1; }
         }
-
-        
-
 
         private void ClearText()
         {
@@ -137,10 +172,7 @@ namespace Yatzy
             listBoxMuligheder.Items.Clear();
         }
 
-        public void textBoxSpiller1_TextChanged(object sender, EventArgs e)
-        {
-            textBoxSpiller1.Text = mitYatzy._spiller1.Navn;
-        }
+      
 
         public void VisMuligheder()
         {
@@ -149,7 +181,7 @@ namespace Yatzy
             if (mitBaeger.PointEttere() > 0) { listBoxMuligheder.Items.Add("Ettere"); }
             if (mitBaeger.PointToere() > 0) { listBoxMuligheder.Items.Add("Toere"); }
             if (mitBaeger.PointTreere() > 0) { listBoxMuligheder.Items.Add("Treere"); }
-            if (mitBaeger.PointFirere() > 0) { listBoxMuligheder.Items.Add("Fireere"); }
+            if (mitBaeger.PointFirere() > 0) { listBoxMuligheder.Items.Add("Firere"); }
             if (mitBaeger.PointFemmere() > 0) { listBoxMuligheder.Items.Add("Femmere"); }
             if (mitBaeger.PointSeksere() > 0) { listBoxMuligheder.Items.Add("Seksere"); }
             if (mitBaeger.PointEtPar() > 0) { listBoxMuligheder.Items.Add("Et par"); }
@@ -165,7 +197,21 @@ namespace Yatzy
 
         }
 
-        private void buttonVaelgMulighed_Click(object sender, EventArgs e)
+       
+
+        public void buttonNytSpil_Click(object sender, EventArgs e)
+        {
+            ClearText();
+          
+
+        }
+
+        private void textBoxSumP1_TextChanged(object sender, EventArgs e)
+        {
+           // textBoxSumP1.Text = mitYatzy._spiller1.SimpelSum.ToString
+        }
+
+        private void buttonVaelgMulighed_Click_1(object sender, EventArgs e)
         {
             switch (listBoxMuligheder.Text)
             {
@@ -235,17 +281,17 @@ namespace Yatzy
                         break;
                     }
                 case "Seksere":
-                    { 
-                    mitYatzy.AktivSpiller.Kombinationer.Seksere.Point = mitBaeger.PointSeksere();
-                    if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
-                    { textBoxSeksereP1.Text = Convert.ToString(mitBaeger.PointSeksere()); }
-                    else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
-                    { textBoxSeksereP2.Text = Convert.ToString(mitBaeger.PointSeksere()); }
-                    else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
-                    { textBoxSeksereP3.Text = Convert.ToString(mitBaeger.PointSeksere()); }
-                    else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
-                    { textBoxSeksereP4.Text = Convert.ToString(mitBaeger.PointSeksere()); }
-                    break;
+                    {
+                        mitYatzy.AktivSpiller.Kombinationer.Seksere.Point = mitBaeger.PointSeksere();
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+                        { textBoxSeksereP1.Text = Convert.ToString(mitBaeger.PointSeksere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        { textBoxSeksereP2.Text = Convert.ToString(mitBaeger.PointSeksere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+                        { textBoxSeksereP3.Text = Convert.ToString(mitBaeger.PointSeksere()); }
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+                        { textBoxSeksereP4.Text = Convert.ToString(mitBaeger.PointSeksere()); }
+                        break;
                     }
                 case "Et par":
                     {
@@ -365,19 +411,10 @@ namespace Yatzy
                         break;
                     }
             }
-            
-        }
+            AntalSlagTilbage = 0;
+            ResetCheckbox();
+            }
 
-        public void buttonNytSpil_Click(object sender, EventArgs e)
-        {
-            ClearText();
-            mitYatzy.NytSpil();
-           
-        }
-
-        private void textBoxSumP1_TextChanged(object sender, EventArgs e)
-        {
-            textBoxSumP1.Text = mitYatzy._spiller1.SimpelSum.ToString
-        }
+        
     }
 }
