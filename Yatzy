@@ -8,23 +8,34 @@ namespace Yatzy
 {
     public class Yatzy
     {
-        public Spiller _spiller1, _spiller2, _spiller3, _spiller4;
-        public Baeger mitBaeger = new Baeger();
-        public Spiller AktivSpiller;
+        public Spiller _spiller1, _spiller2, _spiller3, _spiller4;          //her oprettes fire spiller-objekter
+        public Baeger mitBaeger = new Baeger();                             // her opretter vi en instans af klasse bæger (new'er bæger op)
+        public Spiller AktivSpiller;                                        //her opretter vi endnu et spillerobjket
 
-
-
-
-        public void NytSpil(Spiller et, Spiller to, Spiller tre, Spiller fire)
+        public void NytSpil(Spiller et, Spiller to, Spiller tre, Spiller fire)      //denne metode bruges, når der skal startes et nyt spil
         {
-            mitBaeger = new Baeger();
-            _spiller1 = et;
+            mitBaeger = new Baeger();           // i det nye spil kommer der et nyt bæger
+            _spiller1 = et;                     // vi sætter objekterne _spiller1,2,3 og 4 til at hedde "et,to,tre,fire"
             _spiller2 = to;
             _spiller3 = tre;
             _spiller4 = fire;
-            AktivSpiller = _spiller1;
+            AktivSpiller = _spiller1;           // her angiver vi, at det er _spiller1, der er den første aktive spiller i et nyt spil
 
         }
+
+
+
+
+
+        //Tilføj eventuelt SlutTur()?
+        /* public void SlutTur()
+         * {
+         *  AntalSlagTilbage = 0;
+         *  buttonVaelgMulighed.Enabled = false;
+         *  buttonKastTerninger.Enabled = true;
+         *  */
+
+        
 
 
         //krydstjekker bægerets mulige kombinationer med currentplayers muligheder fra kombineationer: ErStreget && ErUdfyldt == false.
@@ -35,6 +46,3 @@ namespace Yatzy
         //Sammenligningen mellem dicecombination og "muligheder" (evt. fra bæger) Man sammenligner det, man har gemt på spillere med det, man lige har slået inde i bægeret.
     }
 }
-
-
-
