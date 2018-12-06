@@ -17,9 +17,9 @@ namespace Yatzy
             InitializeComponent();
         }
 
-        public Yatzy mitYatzy = new Yatzy();
+        public Yatzy mitYatzy = new Yatzy();        //her opretter vi en instans af klassen Yatzy, så vi kan køre spillet Yatzy
         public Baeger mitBaeger = new Baeger(); // her newer man en instans af en klasse op, så man kan connecte en classe ind i formen. Dette gør, at klassen nu er brugbar i nedenstående.
-        public Spiller Spiller1 = new Spiller();
+        public Spiller Spiller1 = new Spiller();        //her opretter vi fire instanser af klassen Spiller, som er de spillere, der arbejds på i formen.
         public Spiller Spiller2 = new Spiller();
         public Spiller Spiller3 = new Spiller();
         public Spiller Spiller4 = new Spiller();
@@ -28,21 +28,23 @@ namespace Yatzy
 
         private void buttonKastTerninger_Click(object sender, EventArgs e) // Dette er knappen Kaster Terninger
         {
-            mitBaeger.RystBaeger();                                     // her kalder vi metode RystBaeger, som vi har erklæret inde i bæger. Den er brugbar, fordi vi har "new'et" den up inde i denne klasse.
+            mitBaeger.RystBaeger();                                         // her kalder vi metode RystBaeger, som vi har erklæret inde i bæger. Den er brugbar, fordi vi har "new'et" den up inde i denne klasse.
             richTextBoxTerning1.Text = mitBaeger.Terning1.Øjne.ToString();  // her henviser vi til teksten i tekstboksen for den første terning. Vi beder den indeholde bægerets øjne pr. terning og konvertere to string.
             richTextBoxTerning2.Text = mitBaeger.Terning2.Øjne.ToString();
             richTextBoxTerning3.Text = mitBaeger.Terning3.Øjne.ToString();
             richTextBoxTerning4.Text = mitBaeger.Terning4.Øjne.ToString();
             richTextBoxTerning5.Text = mitBaeger.Terning5.Øjne.ToString();
 
+            buttonVaelgMulighed.Enabled = true;         // her sætter vi "Vælg" knappen til at være aktiv, da knappen bliver inaktiv, når der er valgt én gang, så man ikke kan vælge flere resultater på samme tur. 
 
-            Spiller1.Navn = textBoxSpiller1.Text;
+            Spiller1.Navn = textBoxSpiller1.Text;       //her sætter vi de fire spilleres navne til at være teksten fra de fire tekstboxe ude i GUI
             Spiller2.Navn = textBoxSpiller2.Text;
             Spiller3.Navn = textBoxSpiller3.Text;
             Spiller4.Navn = textBoxSpiller4.Text;
 
-            VisMuligheder();
-            TurTæller();
+            VisMuligheder();        // her kalder vi metoden, der gør, at vi kan se alle mulighederne, hver gang terninger bliver kastet.
+            TurTæller();            //her ligger turtælleren, og den er enormt central for designet. Den ligger på KastTerninger, fordi den er bundet op på hvert slag
+            EnableStreger();        // her sætter vi alle streg-knapper til at være aktive igen. De inaktiveres, når én af knapperne bliver klikket på.
 
         }
 
@@ -50,17 +52,17 @@ namespace Yatzy
 
         private void checkBoxHold1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxHold1.Checked == true)    //metode for at holde terning1 -- dette er en kontrolstruktur (?)
-                mitBaeger.Terning1.HoldTerning();   //kalder metode inde fra terningen, som instruerer i at holde på terningen
+            if (checkBoxHold1.Checked == true)    //metode for at holde terning1 -- dette er en kontrolstruktur 
+                mitBaeger.Terning1.HoldTerning();   //kalder metode inde fra terningen, som instruerer i at holde på terningen, når checkboxen er "vinget af".
             else
             {
-                mitBaeger.Terning1.TagTerningMed(); // kalder metode inde fra terningen, som instruerer i at tage terningen med. 
+                mitBaeger.Terning1.TagTerningMed(); // kalder metode inde fra terningen, som instruerer i at tage terningen med, hvis checboxen ikke er "vinget af". 
             }
         }
 
         private void checkBoxHold2_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxHold2.Checked == true)    //metode for at holde terning2
+            if (checkBoxHold2.Checked == true)    //samme som ovenstående. Gælder for alle fem.
                 mitBaeger.Terning2.HoldTerning();
             else
             {
@@ -70,7 +72,7 @@ namespace Yatzy
 
         private void checkBoxHold3_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxHold3.Checked == true)    //metode for at holde terning3
+            if (checkBoxHold3.Checked == true)    
                 mitBaeger.Terning3.HoldTerning();
             else
             {
@@ -80,7 +82,7 @@ namespace Yatzy
 
         private void checkBoxHold4_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxHold4.Checked == true)    //metode for at holde terning4
+            if (checkBoxHold4.Checked == true)    
                 mitBaeger.Terning4.HoldTerning();
             else
             {
@@ -90,7 +92,7 @@ namespace Yatzy
 
         private void checkBoxHold5_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxHold5.Checked == true)    //metode for at holde terning5
+            if (checkBoxHold5.Checked == true)    
                 mitBaeger.Terning5.HoldTerning();
             else
             {
@@ -98,24 +100,34 @@ namespace Yatzy
             }
         }
 
-        private void DisableKastTeringer()
+        private void DisableKastTeringer()      // bruges ved AntalSlagTilbage = 0. Genaktiveres, når der er valgt eller streget.
         {
-            if(buttonKastTerninger.Enabled == true)
+            if(buttonKastTerninger.Enabled == true)     // skal man lave denne kontrolstruktur? Kunne man bare skrive buttonKastTerninger.Enabled = false; ?
             { buttonKastTerninger.Enabled = false; }
         }
 
-        private void EnableKastTerninger()
+        private void EnableKastTerninger()              // denne bruges til at genaktivere knappen for at kaste terninger.
         {
-            if (buttonKastTerninger.Enabled == false)
+            if (buttonKastTerninger.Enabled == false)       // samme som ovenfor i Disable.
             { buttonKastTerninger.Enabled = true; }
         }
 
+        private void EnableVælgMuligheder()     // bruges til at genaktiveres vælg-knappe, når der er skiftet tur.
+        {
+            if (buttonVaelgMulighed.Enabled == false)
+            { buttonKastTerninger.Enabled = true; }
+        }
 
+        private void DisbleVælgMuligheder()         //bruges når der er valgt én mulighed, så du ikke kan vælge flere gange.
+        {
+            if (buttonVaelgMulighed.Enabled == true)
+            { buttonKastTerninger.Enabled = false; }
+        }
 
-        private void ResetCheckbox()
+        private void ResetCheckbox()             //denne metode kaldes, når vi skal have ryddet alle holds på terningerne. Vigtig når der skiftes tur
             {
-            if(checkBoxHold1.Checked == true)
-            { checkBoxHold1.Checked = false; }
+            if(checkBoxHold1.Checked == true)       // vi checker om de er "vinget af", og hvis de er...
+            { checkBoxHold1.Checked = false; }      // sætter vi dem til at være blanke
             if (checkBoxHold2.Checked == true)
             { checkBoxHold2.Checked = false; }
             if (checkBoxHold3.Checked == true)
@@ -126,24 +138,24 @@ namespace Yatzy
             { checkBoxHold5.Checked = false; }
         }
 
-        private int SpillerNr = 1;
-        private int AntalSlagTilbage = 3;
+        private int SpillerNr = 1;              //denne variable indeholder en int og er central for at styre, hvem der er aktiv spiller
+        private int AntalSlagTilbage = 3;       // vi skal sætte denne til at være 3, så den aller første tur i spillet indeholde tre slag.
 
-        public void TurTæller()
+        public void TurTæller()             //metode for turtælleren
         {
-            if (AntalSlagTilbage == 0)
+            if (AntalSlagTilbage == 0)      // vi tjekker om, der er flere slag tilbage for nuværende tur.
             {
-                AntalSlagTilbage = 2;
+                AntalSlagTilbage = 2;           // hvis dette er tilfældet, sætter vi antalslagtilbage til at være to, fordi rullet i turskiftet tæller med som et slag- derfor ikke 3
 
-                if (SpillerNr == 4)
-                { SpillerNr = 1; }
+                if (SpillerNr == 4)     // vi tjekker, om det er spiller 4, der er aktiv.
+                { SpillerNr = 1; }      // hvis det er tilfældet, resetter vi det til at være 1, så den ruller forfra fra 1-4
                 else {
-                    SpillerNr = SpillerNr + 1;
+                    SpillerNr = SpillerNr + 1;      // hvis SpillerNr ikke er 4, tilføjer den +1 til spillernr. Derfor er det smart, at det er en int.
                  }
             }
-            else { AntalSlagTilbage = AntalSlagTilbage - 1;}
+            else { AntalSlagTilbage = AntalSlagTilbage - 1;}  // hvis antalslagtilbage ikke er =0, trækker den -1 fra 
 
-            if (SpillerNr == 1)
+            if (SpillerNr == 1)                                 //det er i disse fire kontrolstrukturer og tilhørende linjer, at vi binder spillernr sammen med den aktive spiller og henter dem fra Yatzy-klassen
             { mitYatzy.AktivSpiller = mitYatzy._spiller1; }
             if (SpillerNr == 2)
             { mitYatzy.AktivSpiller = mitYatzy._spiller2; }
@@ -152,17 +164,17 @@ namespace Yatzy
             if (SpillerNr == 4)
             { mitYatzy.AktivSpiller = mitYatzy._spiller4; }
 
-            textBoxVisAktivSpiller.Text = mitYatzy.AktivSpiller.Navn.ToString();
-            textBoxVisKastTilbage.Text = AntalSlagTilbage.ToString();
+            textBoxVisAktivSpiller.Text = mitYatzy.AktivSpiller.Navn.ToString();        //når ovenstående kobler _spiller1,2,3,4 til SpillerNr kan vi hente navnet fra textboxene og "sette" den string ind i aktiv spillers Navn
+            textBoxVisKastTilbage.Text = AntalSlagTilbage.ToString();               //her viser vi antalslagtilbage ude i tekstboksen
 
-            if (AntalSlagTilbage == 0) // dette statement gør, at man ikke kan klikke på Ryst Terninger, inden man har valgt. Dermed skifte turen på de to knapper
+            if (AntalSlagTilbage == 0) // dette statement gør, at man ikke kan klikke på Ryst Terninger, inden man har valgt. Dermed skifter turen på de to knapper: Vælg og Kast Terninger
                 DisableKastTeringer();
          }
 
       
         private void ClearText()
         {
-            foreach (Control c in Controls)
+            foreach (Control c in Controls)     //HJÆLP DAVID
             {
                 if (c is TextBox)
                 {
@@ -178,13 +190,13 @@ namespace Yatzy
 
       
 
-        public void VisMuligheder()
+        public void VisMuligheder()     //denne metode gør, at vi kan se, hvilke muligheder bægeret præsenterer for os
         {
-            listBoxMuligheder.Items.Clear();
+            listBoxMuligheder.Items.Clear();        // i starten af metoden sørger vi for at cleare listboxen fra sidste tur.
 
-            if (mitBaeger.PointEttere() > 0) { listBoxMuligheder.Items.Add("Ettere"); }
-            if (mitBaeger.PointToere() > 0) { listBoxMuligheder.Items.Add("Toere"); }
-            if (mitBaeger.PointTreere() > 0) { listBoxMuligheder.Items.Add("Treere"); }
+            if (mitBaeger.PointEttere() > 0) { listBoxMuligheder.Items.Add("Ettere"); }         // i alle disse laver vi først et tjek. Er værdien, som returneres fra bægeret større end 0?...
+            if (mitBaeger.PointToere() > 0) { listBoxMuligheder.Items.Add("Toere"); }           // så tilføjer man et "item" i listboxen, som vi giver en string. Det er navnet i listen...
+            if (mitBaeger.PointTreere() > 0) { listBoxMuligheder.Items.Add("Treere"); }         // og også navnet som vi bruger i switchcasen længere nede
             if (mitBaeger.PointFirere() > 0) { listBoxMuligheder.Items.Add("Firere"); }
             if (mitBaeger.PointFemmere() > 0) { listBoxMuligheder.Items.Add("Femmere"); }
             if (mitBaeger.PointSeksere() > 0) { listBoxMuligheder.Items.Add("Seksere"); }
@@ -203,20 +215,70 @@ namespace Yatzy
 
        
 
-        public void buttonNytSpil_Click(object sender, EventArgs e)
+        public void buttonNytSpil_Click(object sender, EventArgs e)     //her klikker vi på knappen nyt spil
         {
-            ClearText(); //rydder alle textboxe
+            ClearText();     //rydder alle textboxe, som vi har defineret tidligere 
 
-            mitYatzy.NytSpil(Spiller1, Spiller2, Spiller3, Spiller4); //opretter et nyt spil. Spillet crasher, hvis man trykker på kastterninger uden at have startet nyt spil
-            
-           
+            EnableAlt();     //her kalder vi metoden, som enabler alle knapper og tekstfelter til navne.
 
+            mitYatzy.NytSpil(Spiller1, Spiller2, Spiller3, Spiller4); //opretter et nyt spil, som indeholder de fire spillere, som vi new'ede op i toppen
+
+            SpillerNr = 1;          // vi sætter spillernr til at være 1, så den resetter ved valget
+            AntalSlagTilbage = 3;   // samme 
         }
 
-        private void textBoxSumP1_TextChanged(object sender, EventArgs e)
+        public void EnableStreger()     // denne metode gør alle knapperne for at strege aktive
         {
-            
-                      
+            buttonStregEttere.Enabled = true;
+            buttonStregToere.Enabled = true;
+            buttonStregTreere.Enabled = true;
+            buttonStregFirere.Enabled = true;
+            buttonStregFemmere.Enabled = true;
+            buttonStregSeksere.Enabled = true;
+            buttonStregEtPar.Enabled = true;
+            buttonStregToPar.Enabled = true;
+            buttonStregTreEns.Enabled = true;
+            buttonStregFireEns.Enabled = true;
+            buttonStregFuldHus.Enabled = true;
+            buttonStregLilleTrappe.Enabled = true;
+            buttonStregStorTrappe.Enabled = true;
+            buttonStregChance.Enabled = true;
+            buttonStregYatzy.Enabled = true;
+        }
+
+        public void DisableStreger()            //denne metode gør alle knapper for at strege inaktive
+        {
+            buttonStregEttere.Enabled = false;
+            buttonStregToere.Enabled = false;
+            buttonStregTreere.Enabled = false;
+            buttonStregFirere.Enabled = false;
+            buttonStregFemmere.Enabled = false;
+            buttonStregSeksere.Enabled = false;
+            buttonStregEtPar.Enabled = false;
+            buttonStregToPar.Enabled = false;
+            buttonStregTreEns.Enabled = false;
+            buttonStregFireEns.Enabled = false;
+            buttonStregFuldHus.Enabled = false;
+            buttonStregLilleTrappe.Enabled = false;
+            buttonStregStorTrappe.Enabled = false;
+            buttonStregChance.Enabled = false;
+            buttonStregYatzy.Enabled = false;            
+        }
+
+        public void EnableAlt()         //denne metode enabler alle checkboxe, textboxe og knapperne
+        {
+            listBoxMuligheder.Enabled = true;
+            buttonKastTerninger.Enabled = true;
+            buttonVaelgMulighed.Enabled = true;
+            textBoxSpiller1.Enabled = true;
+            textBoxSpiller2.Enabled = true;
+            textBoxSpiller3.Enabled = true;
+            textBoxSpiller4.Enabled = true;
+            checkBoxHold1.Enabled = true;
+            checkBoxHold2.Enabled = true;
+            checkBoxHold3.Enabled = true;
+            checkBoxHold4.Enabled = true;
+            checkBoxHold5.Enabled = true;
         }
 
         private void buttonVaelgMulighed_Click_1(object sender, EventArgs e) // denne knap kører en switchcase på alle de muligheder, som de kastede terninger viser.
@@ -224,12 +286,12 @@ namespace Yatzy
         {
             switch (listBoxMuligheder.Text)
             {
-                case "Ettere":
+                case "Ettere":      //"Ettere" henviser til listboxens item, som vi tilføjede
                     {
-                        mitYatzy.AktivSpiller.Kombinationer.Ettere.Point = mitBaeger.PointEttere();
-                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
-                        { textBoxEttereP1.Text = Convert.ToString(mitBaeger.PointEttere()); }
-                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+                        mitYatzy.AktivSpiller.Kombinationer.Ettere.Point = mitBaeger.PointEttere(); // her sætter vi pointene for ettere under den aktive spilleres kombinationer i mitYatzy til at være pointene fra ettere i bægeret
+                        if (mitYatzy.AktivSpiller == mitYatzy._spiller1)                            // de fire nedenstående if-statements tjekker for, hvem der er den aktive spillere...
+                        { textBoxEttereP1.Text = Convert.ToString(mitBaeger.PointEttere()); }       //og overfører så pointene fra bægere til den rette tekstbox
+                        else if (mitYatzy.AktivSpiller == mitYatzy._spiller2)                       // og så frem deles for alle switch casene
                         { textBoxEttereP2.Text = Convert.ToString(mitBaeger.PointEttere()); }
                         else if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
                         { textBoxEttereP3.Text = Convert.ToString(mitBaeger.PointEttere()); }
@@ -420,14 +482,14 @@ namespace Yatzy
                         break;
                     }
             }
-            AntalSlagTilbage = 0;
-            ResetCheckbox();
-            EnableKastTerninger();
+            AntalSlagTilbage = 0;       // dette statement gør, at turen slutter, når en spiller har valgt.
+            ResetCheckbox();            // herefter cleares alle checkboxene
+            EnableKastTerninger();      // og du får igen mulighed for at kaste terningerne, når antalslagtilbage = 0
 
-            //neden for sætter overfører vi sum, bonus og total til GUI'en. Starter med SimpelSum
-            textBoxSumP1.Text = mitYatzy._spiller1.Kombinationer.SimpelSum.ToString();
-            textBoxSumP2.Text = mitYatzy._spiller2.Kombinationer.SimpelSum.ToString();
-            textBoxSumP3.Text = mitYatzy._spiller3.Kombinationer.SimpelSum.ToString();
+            //neden for overfører vi sum, bonus og total til GUI'en. Starter med SimpelSum
+            textBoxSumP1.Text = mitYatzy._spiller1.Kombinationer.SimpelSum.ToString();          //dette er placeret på vælg mulighed, fordi tallene opdateres, hver gang man vælger.
+            textBoxSumP2.Text = mitYatzy._spiller2.Kombinationer.SimpelSum.ToString();          // man kunne også have lagt det på kast terninger, men det giver bedst mening her,...
+            textBoxSumP3.Text = mitYatzy._spiller3.Kombinationer.SimpelSum.ToString();          // da det er på denne knap, at der ændres i pointene
             textBoxSumP4.Text = mitYatzy._spiller4.Kombinationer.SimpelSum.ToString();
 
             //Bonus
@@ -442,19 +504,249 @@ namespace Yatzy
             textBoxTotalP3.Text = mitYatzy._spiller3.Kombinationer.Total.ToString();
             textBoxTotalP4.Text = mitYatzy._spiller4.Kombinationer.Total.ToString();
 
+            buttonVaelgMulighed.Enabled = false;                // dette statement gør, at knappen deaktiveres, når du har trykket på den én gang. Derfor kan du vælge én gang pr. tur.
         }
 
-        private void textBoxSumP2_TextChanged(object sender, EventArgs e)
+        #region Streger
+        private void buttonStregEttere_Click(object sender, EventArgs e)        //klik på stregerknappen for ettere. Nedenstående kode er ens for alle. Kunne man lave fælles metode?
         {
-            textBoxSumP2.Text = mitYatzy._spiller2.Kombinationer.SimpelSum.ToString();
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)        //kontrol: er aktivspiller=spiller1?
+            { textBoxEttereP1.Text = "------"; }                    // så sætter vi en string i tekstfeltet med en streg
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)        //samme osv.
+            { textBoxEttereP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxEttereP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxEttereP4.Text = "-----"; }
+            AntalSlagTilbage = 0;                                   // dette gør, at man mister sin tur, når man har streget
+            buttonVaelgMulighed.Enabled = false;                    // dette gør, at du ikke kan vælge, når du har streget
+            buttonKastTerninger.Enabled = true;                     // dette gør, at du kan kaste terningerne, selvom der ikke er flere slag, når du har streget.
+            DisableStreger();                                       // denne metode deaktivere alle knapper, der kan strege, så du ikke kan strege flere på én tur
         }
 
-        private void textBoxSumP3_TextChanged(object sender, EventArgs e)
+        private void buttonStregToere_Click(object sender, EventArgs e)
         {
-            textBoxSumP2.Text = mitYatzy._spiller2.Kombinationer.SimpelSum.ToString();
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxToereP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxToereP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxToereP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxToereP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
         }
 
-        //SimpelSum overføres til textbox
+        private void buttonStregTreere_Click(object sender, EventArgs e)
+        {
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxTreereP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxTreereP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxTreereP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxTreereP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
+        }
 
+        private void buttonStregFirere_Click(object sender, EventArgs e)
+        {
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxFirereP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxFirereP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxFirereP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxFirereP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
+        }
+
+        private void buttonStregFemmere_Click(object sender, EventArgs e)
+        {
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxFemmereP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxFemmereP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxFemmereP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxFemmereP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
+        }
+
+        private void buttonStregSeksere_Click(object sender, EventArgs e)
+        {
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxSeksereP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxSeksereP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxSeksereP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxSeksereP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
+        }
+
+        private void buttonStregEtPar_Click(object sender, EventArgs e)
+        {
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxEtParP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxEtParP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxEtParP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxEtParP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
+        }
+
+        private void buttonStregToPar_Click(object sender, EventArgs e)
+        {
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxToParP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxToParP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxToParP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxToParP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
+        }
+
+        private void buttonStregTreEns_Click(object sender, EventArgs e)
+        {
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxTreEnsP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxTreEnsP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxTreEnsP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxTreEnsP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
+        }
+
+        private void buttonStregFireEns_Click(object sender, EventArgs e)
+        {
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxFireEnsP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxFireEnsP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxFireEnsP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxFireEnsP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
+        }
+
+        private void buttonStregFuldHus_Click(object sender, EventArgs e)
+        {
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxFuldtHusP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxFuldtHusP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxFuldtHusP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxFuldtHusP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
+        }
+
+        private void buttonStregLilleTrappe_Click(object sender, EventArgs e)
+        {
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxLilleTrappeP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxLilleTrappeP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxLilleTrappeP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxLilleTrappeP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
+        }
+
+        private void buttonStregStorTrappe_Click(object sender, EventArgs e)
+        {
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxStorTrappeP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxStorTrappeP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxStorTrappeP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxStorTrappeP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
+        }
+
+        private void buttonStregChance_Click(object sender, EventArgs e)
+        {
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxChanceP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxChanceP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxChanceP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxChanceP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
+        }
+
+        private void buttonStregYatzy_Click(object sender, EventArgs e)
+        {
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller1)
+            { textBoxYatzyP1.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller2)
+            { textBoxYatzyP2.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller3)
+            { textBoxYatzyP3.Text = "------"; }
+            if (mitYatzy.AktivSpiller == mitYatzy._spiller4)
+            { textBoxYatzyP4.Text = "------"; }
+            AntalSlagTilbage = 0;
+            buttonVaelgMulighed.Enabled = false;
+            buttonKastTerninger.Enabled = true;
+            DisableStreger();
+        }
+        #endregion
     }
 }
