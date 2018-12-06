@@ -8,13 +8,13 @@ namespace Yatzy
 {
    public class Baeger
     { 
-        public Terning Terning1 = new Terning();
+        public Terning Terning1 = new Terning(); // vi newer fem terninger op for at kunne arbejde med terningerne i bægeret. 
         public Terning Terning2 = new Terning();
         public Terning Terning3 = new Terning();
         public Terning Terning4 = new Terning();
         public Terning Terning5 = new Terning();
 
-        public void RystBaeger()
+        public void RystBaeger() //rystbæger-metoden sørger for, at vi kan kaste fem terninger samtidig.
         {
             Terning1.KastTerning();
             Terning2.KastTerning();
@@ -24,11 +24,11 @@ namespace Yatzy
         }
 
 
-        public int HvorMangeAfEnSlags(int Slags)
+        public int HvorMangeAfEnSlags(int Slags) // i denne metode lokaliserer vi, hvor mange af én bestemt slags terninger der er for det givne slag.
         {
-            int Antal = 0;
-            if (Terning1.Øjne == Slags)
-            { Antal = Antal + 1; }
+            int Antal = 0;              // vi definerer variablen Antal, som angiver hvor mange af en slags terninger, der er. Hver gang man tæller den samme slags, øges antallet med én.
+            if (Terning1.Øjne == Slags) // her tester vi terning1's øjne op imod Slags, som er en variabel, der indeholder en int. Jo flere ens Slags, ...
+            { Antal = Antal + 1; }      // destor flere gange udføres denne funktion, hvor Antal øges med én per terning = Slags
             if (Terning2.Øjne == Slags)
             { Antal = Antal + 1; }
             if (Terning3.Øjne == Slags)
@@ -41,150 +41,151 @@ namespace Yatzy
         }
 
 
-        public int PointEttere()
+        public int PointEttere()         // her får vi pointene fra etterne ved at tjekke for antallet ved Slags = 1 (og gange med 1)
         {
             return HvorMangeAfEnSlags(1);
         }
 
-        public int PointToere()
+        public int PointToere()         // her får vi pointene fra toerne ved at tjekke for antallet ved Slags = 2 og gange med 2
         {
             return HvorMangeAfEnSlags(2) * 2;
         }
 
-        public int PointTreere()
+        public int PointTreere()        // her får vi pointene fra treerne ved at tjekke for antallet ved Slags = 3 og gange med 3
         {
             return HvorMangeAfEnSlags(3) * 3;
         }
 
-        public int PointFirere()
+        public int PointFirere()        // her får vi pointene fra firerne ved at tjekke for antallet ved Slags = 4 og gange med 4
         {
             return HvorMangeAfEnSlags(4) * 4;
         }
 
-        public int PointFemmere()
+        public int PointFemmere()       // her får vi pointene fra femmerne ved at tjekke for antallet ved Slags = 5 og gange med 5
         {
             return HvorMangeAfEnSlags(5) * 5;
         }
 
-        public int PointSeksere()
+        public int PointSeksere()       // her får vi pointene fra sekserne ved at tjekke for antallet ved Slags = 6 og gange med 6
         {
             return HvorMangeAfEnSlags(6) * 6;
         }
     
         public int PointEtPar()
         {
-            int i;  //i'et repræsenterer antal øjne på terningen
-            for (i = 6; i >= 1; i--) // vi starter ved seks for at finde det største par
+            int i;                      //i'et repræsenterer antal øjne på terningen
+            for (i = 6; i >= 1; i--)    // vi starter ved seks for at finde det største par. Forløkken tjekker for alle tal ned til 1. Den skifter fra 6 til 5 til 4 til 3 til 2 til 1
             {
-                if (HvorMangeAfEnSlags(i) > 1); 
-                    return i * 2;   
+                if (HvorMangeAfEnSlags(i) > 1)  //her er den relle test for, om der er én af terningkombinationerne, der har mindst to sæt øjne til fælles.
+                    return i * 2;       // her returneres antal øjne fra i gange med to terninger
             }
-            return 0;
+            return 0;                   // ellers returneres 0
         }
 
         public int PointToPar()
         {
-            int FoerstePar = 0;
-            int AndetPar = 0;
+            int FoerstePar = 0;         // her sættes en variabel for første par til at være 0 i udgangspunktet
+            int AndetPar = 0;            // her sættes en variabel for andet par til at være 0 i udgangspunktet
 
-            for (int i = 6; i >= 1; --i)
+            for (int i = 6; i >= 1; --i) // På samme måde som under et par kører en forløkke fra 6 og ned til 1. 6,5,4,3,2,1.
             {
-                if (HvorMangeAfEnSlags(i) > 1)
+                if (HvorMangeAfEnSlags(i) > 1) // hvis der er flere end to terninger med samme antal øjne
                 {
-                    if (FoerstePar == 0)
+                    if (FoerstePar == 0) // og hvis første par = 0
                     {
-                        FoerstePar = i * 2;
+                        FoerstePar = i * 2; // sættes pointene fra det første par til være antal øjne på terningerne og ganget med to for hver terning
                     }
                     else
                     {
-                        AndetPar = HvorMangeAfEnSlags(i) * 2;
-                        return FoerstePar + AndetPar;
+                        AndetPar = HvorMangeAfEnSlags(i) * 2;   //hvis variablen første par er ændret til ikke at være 0, køres denne funktion, hvor variablen AndetPar sættes til at være antal øjne gange to terninger
+                        return FoerstePar + AndetPar; // hvis den finder to par, returnes summen af de to par
                     }
                 }
             }
-            return 0;
+            return 0;               // ellers returneres int 0
         }
 
-        public int PointTreEns()
+        public int PointTreEns()        
         {
-            int i;  //i'et repræsenterer antal øjne på terningen
-            for (i = 6; i >= 1; i--)
+            int i;                          //i'et repræsenterer antal øjne på terningen
+            for (i = 6; i >= 1; i--)        // forløkken tjekker fra 6 og ned til 1. 6,5,4,3,2,1
             { 
-            if (HvorMangeAfEnSlags(i) > 2)
-                return i * 3;
+            if (HvorMangeAfEnSlags(i) > 2)  // her foregår et tjek for, om der er flere end to terninger, der har ens antal øjne    
+                return i * 3;               // hvis ovenstående er tilfældet, returneres antallet af øjne ganget med 3 terninger
             } 
-             return 0;
+             return 0;                      // ellers returneres 0
         }
 
         public int PointFireEns()
         {
-            int i;  //i'et repræsenterer antal øjne på terningen
-            for (i = 6; i >= 1; i--) // forloop starter med at tjekke på 6'ere (indikeret af i=6) og derefter 5,4,3,2,1 (indikeret af ;>=1). For hvert trin går i én ned (indikeret er i--)
+            int i;                          //i'et repræsenterer antal øjne på terningen
+            for (i = 6; i >= 1; i--)        // forloop starter med at tjekke på 6'ere (indikeret af i=6) og derefter 5,4,3,2,1 (indikeret af ;>=1). For hvert trin går i én ned (indikeret er i--)
             {
-                if (HvorMangeAfEnSlags(i) > 3) // her tester vi, om flere terninger med samme antal øjne (i) er over 3 - altså fire ens.
-                    return i * 4; //hvis det er tilfældet ganges antallet af øjne på den slags (i) med 4 for fire ens.
+                if (HvorMangeAfEnSlags(i) > 3)      // her tester vi, om flere terninger med samme antal øjne (i) er over 3 - altså fire ens.
+                    return i * 4;                   //hvis det er tilfældet ganges antallet af øjne på den slags (i) med 4 for fire ens.
             }
             return 0; //ellers returneres intet.
         }
 
         public int PointFuldHus()
         {
-            int i; //i repræsenterer antal øjne på terningen
-            int treAfEnSlags = 0;
-            int toAfEnSlags = 0;
+            int i;                  //i repræsenterer antal øjne på terningen
+            int treAfEnSlags = 0;   // variable for treafenslags sættes ti 0
+            int toAfEnSlags = 0;    // variable for treafenslags sættes ti 0
 
-            for (i = 6; i >= 1; i--)
+            for (i = 6; i >= 1; i--)        //forløkke tjekker fra 6 til 1
             {
-                if (HvorMangeAfEnSlags(i) == 3)
+                if (HvorMangeAfEnSlags(i) == 3)     // først tjekkes for hvis der præcist er 3 terninger af den samme slags(i)
                 {
-                    treAfEnSlags = i * 3;
+                    treAfEnSlags = i * 3;           // hvis det er tilfældet, ganger vi antallet af øjne med 3 (pr terninger) for at få pointene
 
-                    if (toAfEnSlags != 0)
-                        return toAfEnSlags + treAfEnSlags;
+                    if (toAfEnSlags != 0)           //her krydstjekker vi, om variablen toAfEnSlags er blevet ændret/fundet først. Hvis den ikke er 0
+                        return toAfEnSlags + treAfEnSlags;      //.. returneres summen af de to variabler
                 }
-                else if (HvorMangeAfEnSlags(i) == 2)
+                else if (HvorMangeAfEnSlags(i) == 2)        // ellers hvis toAfEnSlags ikke er 0, fortsætter denne del af koden. Her tjekker man, om præcist to terninger er ens
                 {
-                    toAfEnSlags = i * 2;
+                    toAfEnSlags = i * 2;                    // her ganges antallet af øjne (i) med 2 terninger, hvis der er præcist to ens terninger.
 
-                    if (treAfEnSlags != 0)
-                        return toAfEnSlags + treAfEnSlags;
+                    if (treAfEnSlags != 0)                  // hvis treAfEnSlags ikke er i 0
+                        return toAfEnSlags + treAfEnSlags;  //returneres summen af de to variabler.
                 }
             }
-            return 0;
+            return 0;                                   // ellers returneres 0
         }
 
         public int PointLilleTrappe()   
-        {
+        {                               // her tjekker ví, om de fem terninger indeholder præcist én af hver på nær seksere
             if (HvorMangeAfEnSlags(1) == 1 && HvorMangeAfEnSlags(2) == 1 && HvorMangeAfEnSlags(3) == 1 && HvorMangeAfEnSlags(4) == 1 && HvorMangeAfEnSlags(5) == 1 && HvorMangeAfEnSlags(6) == 0)
-                return 15;
-            else return 0;
+                return 15;          //hvis det er tilfældet, returneres summen = 15
+            else return 0;          //ellers returneres 0
         }
 
         public int PointStorTrappe()
-        {
+        {                               // her tjekker ví, om de fem terninger indeholder præcist én af hver på nær seksere
             if (HvorMangeAfEnSlags(1) == 0 && HvorMangeAfEnSlags(2) == 1 && HvorMangeAfEnSlags(3) == 1 && HvorMangeAfEnSlags(4) == 1 && HvorMangeAfEnSlags(5) == 1 && HvorMangeAfEnSlags(6) == 1)
-                return 20;
-            else return 0;
+                return 20;                  //hvis det er tilfældet, returneres summen = 15
+            else return 0;                  //ellers returneres 0
         }
 
 
         public int PointChance()
         {
-            int sum;
-            sum = Terning1.Øjne + Terning2.Øjne + Terning3.Øjne + Terning4.Øjne + Terning5.Øjne;
-            return sum;
+            int sum;            // i metoden for chance definerer vi en variable, der indeholder en int
+            sum = Terning1.Øjne + Terning2.Øjne + Terning3.Øjne + Terning4.Øjne + Terning5.Øjne; // summen sættes til at være summen af alle øjne på de fem terninger
+            return sum;             // vi returner summen
+                                    // vi skriver ikke "return 0" i chancen, da den altid vil returnere mindst fem point.
            
         }
 
         public int PointYatzy()
         {
-            int i;  
-            for (i = 6; i >= 1; i--) 
+            int i;                      //vi definerer en variabel i, der repræsenterer antal øjne
+            for (i = 6; i >= 1; i--)    //forløkke tjekker for tallenne fra 6 til 1. 6,5,4,3,2,1
             {
-                if (HvorMangeAfEnSlags(i) > 4) 
-                    return 50; 
+                if (HvorMangeAfEnSlags(i) > 4)  // her tjekker vi for, om der er over fire (=5) af en slags
+                    return 50;                  // hvis det er tilfældet, returneres 50 point.
             }
-            return 0;
+            return 0;                           // ellers returneres 0
         }
           
     }
