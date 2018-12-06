@@ -8,24 +8,24 @@ namespace Yatzy
 {
     public class Terning
     {
-            private int antalØjne;  //definerer objekt antalØjne
+            private int antalØjne;                  //definerer objekt antalØjne
             private static Random r = new Random();  //definerer metode Random "new'er metode up"
-            private Boolean HoldMig = false; // definerer metode HoldMig
+            private Boolean HoldMig = false;        // definerer metode HoldMig, som er true/false
 
-            public int Øjne
+            public int Øjne                 //vi definerer en variable, som kan hente og returnere et antal øjne. Dette bruges på terningen
             {
-                get { return antalØjne; }
+                get { return antalØjne; }  // Øjne indeholder altså en variabel, der indeholder antallet af øjne
             }
 
-            public Boolean Holdt
+            public Boolean Holdt        // gør det muligt at holde en terning. Enten er terningen true eller false : holdt eller ikke.
             {
                 get { return HoldMig; } //henter værdien for, om terningen er holdt. Som udgangspunkt false, som vi definerede i toppen
             }
-            public void KastTerning() // denne metode kaster terningen, KUN HVIS HoldMig=false. Metoden kaldes, hvor r.Next(1,7) henter random tal mellem 1-6.
+            public void KastTerning() // denne metode kaster terningen, kin hvis HoldMig=false. 
             {
-                if (HoldMig == false)
-                { antalØjne = r.Next(1, 7); }
-            }
+                if (HoldMig == false)       
+                { antalØjne = r.Next(1, 7); }       // Metoden kaldes, hvor r.Next(1,7) henter random tal mellem 1-6.
+        }
 
             public void HoldTerning()  // denne metode holder terningen , hvis HoldMig er true
             {
