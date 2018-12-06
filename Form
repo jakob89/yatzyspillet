@@ -522,6 +522,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;                    // dette gør, at du ikke kan vælge, når du har streget
             buttonKastTerninger.Enabled = true;                     // dette gør, at du kan kaste terningerne, selvom der ikke er flere slag, når du har streget.
             DisableStreger();                                       // denne metode deaktivere alle knapper, der kan strege, så du ikke kan strege flere på én tur
+            ResetCheckbox();                                        // her clearer vi checkboxe, så man ikke trækker sine hold med over i næste tur efter en stregning.
         }
 
         private void buttonStregToere_Click(object sender, EventArgs e)
@@ -538,6 +539,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
 
         private void buttonStregTreere_Click(object sender, EventArgs e)
@@ -554,6 +556,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
 
         private void buttonStregFirere_Click(object sender, EventArgs e)
@@ -570,6 +573,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
 
         private void buttonStregFemmere_Click(object sender, EventArgs e)
@@ -586,6 +590,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
 
         private void buttonStregSeksere_Click(object sender, EventArgs e)
@@ -602,6 +607,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
 
         private void buttonStregEtPar_Click(object sender, EventArgs e)
@@ -618,6 +624,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
 
         private void buttonStregToPar_Click(object sender, EventArgs e)
@@ -634,6 +641,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
 
         private void buttonStregTreEns_Click(object sender, EventArgs e)
@@ -650,6 +658,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
 
         private void buttonStregFireEns_Click(object sender, EventArgs e)
@@ -666,6 +675,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
 
         private void buttonStregFuldHus_Click(object sender, EventArgs e)
@@ -682,6 +692,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
 
         private void buttonStregLilleTrappe_Click(object sender, EventArgs e)
@@ -698,6 +709,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
 
         private void buttonStregStorTrappe_Click(object sender, EventArgs e)
@@ -714,6 +726,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
 
         private void buttonStregChance_Click(object sender, EventArgs e)
@@ -730,6 +743,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
 
         private void buttonStregYatzy_Click(object sender, EventArgs e)
@@ -746,6 +760,7 @@ namespace Yatzy
             buttonVaelgMulighed.Enabled = false;
             buttonKastTerninger.Enabled = true;
             DisableStreger();
+            ResetCheckbox();
         }
         #endregion
     }
