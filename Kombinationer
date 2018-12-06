@@ -8,9 +8,10 @@ namespace Yatzy
 {
     public class Kombinationer
     {
+        // her opretter vi objekter af klassen resultat
         public Resultat Ettere, Toere, Treere, Firere, Femmere, Seksere, EtPar, ToPar, TreEns, FireEns, FuldHus, LilleTrappe, StorTrappe, Chance, Yatzy;
 
-        public Kombinationer()
+        public Kombinationer()      // det her skal vi lige have udspecificeret af David, hvad vi helt præcist gør. Han skal forklare det med ord
         { 
         Ettere = new Resultat { Navn = "Ettere" };
         Toere = new Resultat { Navn = "Toere" };
@@ -30,24 +31,24 @@ namespace Yatzy
 
         }
 
-        public int SimpelSum // dette skal ikke være en metode men en variabel.
+        public int SimpelSum //her oprettes en variable, som indeholder en int. 
         {
-            get{ return (Ettere.Point + Toere.Point + Treere.Point + Firere.Point + Femmere.Point + Seksere.Point); }
+            get{ return (Ettere.Point + Toere.Point + Treere.Point + Firere.Point + Femmere.Point + Seksere.Point); } //den int sættes til at være summen af pointene for ettere til seksere
         }
 
         public int Bonus // dette skal ikke være en metode men en variabel.
         {
-            get
+            get         // man kan hente bonusen, hvis
             {
                 if (SimpelSum >= 63)
-                { return 50; }
-                else { return 0; }
+                { return 50; }      //hermed returneres 50 point, hvis SimpenSum er lig eller over 63
+                else { return 0; }  // ellers returneres 0
             }
         }
 
         public int Total
         {
-            get
+            get         //her oprettes en total, som kan hente og sætte værdier. Værdierene er ints fra SimpelSum (de seks første) eventuel bonus samt de resterende fra etpar til Yatzy.
             {
                 return (SimpelSum + Bonus + EtPar.Point + ToPar.Point + TreEns.Point + FireEns.Point + FuldHus.Point + LilleTrappe.Point + StorTrappe.Point + Chance.Point + Yatzy.Point);
             }
