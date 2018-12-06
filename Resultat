@@ -8,10 +8,10 @@ namespace Yatzy
 {
     public class Resultat 
     {
-        public string Navn { get; set; }
+        public string Navn { get; set; }        //her angiver vi, at et resultat skal have et navn (string), så vi kan kalde dem fx Ettere, Toere, Chance, Yatzy etc.
       //  public bool ErStreget { get; set; }
       //  public bool ErUdfyldt { get; set; }
-        public int Point { get; set; }
-
+        public int Point { get; set; }          // her sætter vi en variabel, som indeholder int. Den kan hente og sætte en værdi
+        
     }
 }
